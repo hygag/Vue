@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        * {
+            padding: 0px;
+            margin: 0px;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            position: relative;
+        }
+
+        #creatDiv {
+
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: flex-end;
+            margin-top: 60px;
+            width: auto;
+            height:auto;
+            background-color: aqua;
+            /* justify-content: space-around; */
+            position: relative;
+            /* border: solid 1px black; */
+            /* transform: translate(0.3);  */
+        }
+
+       
+
+       
+    </style>
+</head>
+
+<body>
+    <!-- <p id="tip" style="transform:scale(0.6);">(值不能超过10)</P> -->
+    
+    <div>
+        方块个数：
+        <input type="text" id="fk">
+        <button id="btn">提交</button>
+       
+    </div>
+    <p id="tip" style="transform:scale(0.6);">(值不能超过10)</P>
+
+    <div>
+        <button onclick="msort()" style="margin-right: 40px;">冒泡排序</button>
+        <button onclick="csort()" style="margin-right: 40px;">选择排序</button>
+        <button onclick="hsort()">哈希排序</button>
+    </div>
+    <p style="transform:scale(0.6);">如果要查看其他排序，请重新输入数据</p>
+
+    <div id="creatDiv">
+
+
+    </div>
+
+
+    <div id="result">
+        <p id="q1"></p>
+        <p id="q2"></p>
+    </div>
+    <script src="setFk.js"></script>
+    <script src="sort.js"></script>
+</body>
+
+</html>
