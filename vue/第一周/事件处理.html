@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../vue.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+
+    <!-- 
+        v-on:   简写  @
+        v-bind: 简写  ：      (单向绑定)                                                           
+        v-model:简写  v-model (双向绑定) 注：只能用在表单元素中 例如 <input type = "text" v-model:value = "name">(输入型标签)
+                                                                                       v-model = "name"(简写)  
+        
+        默认的话，可传有参跟无参
+            无参的话会默认传入一个 event 属性,跟js里面那个event一样，就可以去操作更多了
+                                            比如 event.target.innerHTML
+            有参的话直接传参数即可
+                定义 ：@click = "function(num)"; 会发现，如果这么传，那么如上的event就无了, 这个时候需要改变一下
+                如下 ：@click = "function($event, num)"; 将 event 绑定下来 
+                
+    -->
+
+    <div id="root">
+        <input type="text" name="" id="" v-model="value">(v-model) <br>
+        <input type="text" name="" id="" :value="value"> (v-bind) <br>
+
+        <button @click="showinfo1">点我提示信息!(不传参数)</button><br>
+        <button @click="showinfo2($event, 66)">点我提示信息!!(传参数)</button>
+    </div>
+
+
+    <script>
+
+        const vm = new Vue({
+            el: "#root",
+            data: {
+                value: "aa"
+            },
+            methods: {
+                showinfo1(event) {
+
+                    console.log(event.target.innerHTML)
+                    console.log(this === vm)
+                },
+                showinfo2(event, num) {
+                    console.log(num)
+                    console.log(event.target.innerHTML)
+                    console.log(this)
+                }
+            }
+        })
+
+    </script>
+</body>
+
+</html>

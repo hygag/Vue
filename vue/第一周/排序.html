@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../vue.js"></script>
+</head>
+
+<body>
+    <div id="hy">
+        <h1>人员列表</h1>
+        <input type="text" v-model="keyword">
+        <button @click="sortType = 2">升序</button>
+        <button @click="sortType = 1">降序</button>
+        <button @click="sortType = 0">原序</button>
+        <!-- v-for="(value, index) in(of) 数组/字符串/对象/次数" -->
+        <!-- <li v-for="(p, index) in persons" :key="index">{{p.name}}-{{p.age}}-{{index}}</li> -->
+        <li v-for="(p, index) in filters" :key="p.id">{{p.name}}-{{p.age}}</li>
+
+    </div>
+
+    <script>
+        const vm = new Vue({
+            el: '#hy',
+            data: {
+                keyword: '',
+                persons: [
+                    { id: '01', name: "马梅", age: "13" },
+                    { id: '02', name: "冬天", age: "28" },
+                    { id: '03', name: "夏天", age: "15" },
+                    { id: '04', name: "小元", age: "13" },
+                    { id: '05', name: "马元", age: "18" },
+                    { id: '06', name: "小明", age: "16" }
+                ],
+                sortType: 0 //0 原序， 1 降序， 2 升序
+            },
+
+            // 字符串过滤：数组名.filter((item)=>{
+            //     return item(条件)
+            // })
+            // 会产生一个新数组
+
+            // 查找字符串是否包涵某字符
+            // 字符串查找：数组名.indexOf(需要被找的字符)
+            // 没找到会返回-1
+            // watch: {
+            //     keyword: {
+            //         immediate: true,
+            //         handler(cur, pre) {
+            //             //console.log(cur),
+
+            //             this.filters = this.persons.filter((p) => {
+            //                 return p.name.indexOf(cur) !== -1 || p.age.indexOf(cur) !== -1
+            //             })
+            //         }
+            //     }
+            // }
+            methods: {
+
+            },
+
+            // sort方法，可以写参数用来进行升序降序的判断
+            // 数组名.sort((a, b) = {
+            //     return (条件)
+            // })
+
+            computed: {
+                filters() {
+                    let arr = this.persons.filter((p) => {
+                        return p.name.indexOf(this.keyword) !== -1 || p.age.indexOf(this.keyword) !== -1
+                    })
+
+                    if (this.sortType) {
+                        arr.sort((a, b) => {
+                            return this.sortType == 2 ? a.age - b.age : b.age - a.age
+                        })
+                    }
+                    return arr
+                },
+                // filterPerson(){
+                //     return this.filters.sort((a, b)=>{
+                //         return this.sortType == 0 ? 0 : this.sortType == 2 ? a.age - b.age : b.age - a.age
+                //     })
+                // }
+            }
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../vue.js"></script>
+</head>
+
+<body>
+    <div id="hy">
+        <h1>人员列表</h1>
+        <!-- <input type="text" v-model="keyword"> -->
+        <h1 v-if="car.color">Color:{{car.color}}</h1>
+        <button @click="change">改变</button>
+        <!-- v-for="(value, index) in(of) 数组/字符串/对象/次数" -->
+        <!-- <li v-for="(p, index) in persons" :key="index">{{p.name}}-{{p.age}}-{{index}}</li> -->
+        <!-- <li v-for="(p, index) in persons" :key="p.id">{{p.name}}-{{p.age}}</li> -->
+
+    </div>
+    <!-- vm._data.set(target, key, value)
+        vm.$data.set() -->
+    <script>
+        const vm = new Vue({
+            el: '#hy',
+            data: {
+                car:{
+                    name:"a",
+                },
+             
+            },
+            methods: {
+                change() {
+                   Vue.set(this.car, "color", "red")
+                }
+            }
+
+
+        })
+    </script>
+</body>
+
+</html>

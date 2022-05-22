@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../vue.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 插值语法 -->
+    <!-- <div id="root">
+        姓：<input type="text" v-model="lastname"> <br><br>
+        名：<input type="text" v-model="firstname"> <br><br>
+        全名：<span>{{lastname.slice(0, 3)}} - {{firstname}}</span>
+         slice(start, end) : 截取字符串 
+    </div> -->
+
+    <!-- methods -->
+    <!-- <div id="root">
+        姓：<input type="text" v-model="lastname"> <br><br>
+        名：<input type="text" v-model="firstname"> <br><br>
+        全名：<span>{{fullName()}}</span>
+    </div> -->
+
+
+    <!-- 计算属性 -->
+    <div id="root">
+        姓：<input type="text" v-model="lastname"> <br><br>
+        名：<input type="text" v-model="firstname"> <br><br>
+        全名：<span>{{fullName}}</span>
+        <!-- {{fullName.get() is worry}} -->
+    </div>
+
+
+    <script>
+        const vm = new Vue({
+            el: '#root',
+            // data的数据每次改变都会使得Vue重新解析
+            data: {
+                lastname: "张",
+                firstname: "三",
+                // 右边：左边
+                // 右边叫做属性名，左边叫做属性值
+            },
+                
+            // methods:{
+            //     fullName(){
+            //         return this.lastname +"-"+ this.firstname
+            //     }
+            // }
+
+
+            // 计算属性 = 拿着-已有的属性-去加工
+            computed:{ 
+                // -----完整写法
+                // fullName:{
+                   
+
+                //     //有人读取fullname时,get就会被调用,并且返回的值就是fullname的值
+                //     //get()读完后,将东西存到缓存里了
+                //         // 1.初次读取会调用get()
+                //         // 2.所依赖的改变的时候(因为我的get()依赖的是data里的数据，
+                //         //   所以当data的数据遭到改变的时候(getter里依赖了的)就会调用getter)
+                //     get(){
+                //         // console.log("a");
+                //         return this.lastname + this.firstname;
+                //     },
+                //     // 当fullname被修改的时候，setter会执行
+                //     set(value){
+                //         alert(value)
+                //     }
+                // }
+
+
+                //----简写 只用getter,不用setter
+
+                fullName(){
+                    return this.lastname + this.firstname;
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

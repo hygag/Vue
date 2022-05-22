@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../vue.js"></script>
+</head>
+
+<body>
+    <div id="hy">
+        <!-- v-for="(value, index) in(of) 数组/字符串/对象/次数" -->
+        <li v-for="(p, index) in persons" :key="index">{{p.name}}-{{p.age}}-{{index}}</li>
+        <li v-for="(p, index) of car" :key="index">{{index}}-{{p}}</li>
+    </div>
+
+    <script>
+        const vm = new Vue({
+            el: '#hy',
+            data: {
+                persons: [
+                    { id: '01', name: "aa", age: 13 },
+                    { id: '02', name: "bb", age: 8 },
+                    { id: '03', name: "cc", age: 5 }
+                ],
+                car: {
+                    name:"a",
+                    color:"red",
+                    size:45
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
