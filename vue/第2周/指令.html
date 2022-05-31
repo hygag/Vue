@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../vue.js"></script>
+</head>
+
+<body>
+
+    <div id="hy">
+        <h1>指令！！！</h1>
+        <ul >
+            <li type="1">
+                v-text:文本渲染(但是一般都用插值语法{{txt}}---'这里的aaa是插值语法')<br><br>
+                用法：<span v-text="txt"></span>-------(span v-text="txt")(span) <br> <br>
+                缺点：没有插值语法灵活，渲染文本后，就不能对表签内的文本进行解析，并且，也不会解析name里面的表签元素
+            </li>
+            <br><br>
+            <li type="1">
+                v-html:渲染html结构的内容，也就是可以插入表签(跟v-text一样直接渲染整个标签)<br><br>
+                用法：<span v-html="txt"></span>-------(span v-html="txt")(span) <br> <br>
+            </li>
+            <br><br>
+            <li type="1">
+                v-cloak:用于在有时候被阻塞的时候隐藏那些未加载完成的标签
+            </li>
+            <li type="1">
+                v-once:也无值，用于初始化，初次动态渲染后就变静态了
+            </li>
+            <li type="1">
+                v-pre:跳过其节点的的编译
+            </li>
+        </ul>
+    </div>
+
+
+
+
+
+    <script>
+        const vm = new Vue({
+            el: '#hy',
+            data: {
+                txt: "aaa",
+                school:"文理"
+            }
+        })
+
+    </script>
+</body>
+
+</html>

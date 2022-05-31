@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../vue.js"></script>
+</head>
+
+<body>
+    <div id="hy">
+        <!-- 
+            1.v-model:必须放在有value的框框里进行绑定 
+                后缀:1.trim---一般放在输入框里，去除前后空格
+                    2.number---一般配套type="number"使用，用来转化为数字，默认接收是字符串
+                    3.lazy---聚焦消失后再进行交互与收集，可以放到textarea里
+            2.一般给单选按钮进行绑定v-model的时候需要给他们配一个value，对应第一条性质        
+        
+        -->
+        <form @submit.prevent="demo">
+            账号:<input type="text" v-model.trim="account"> <br><br>
+            密码:<input type="password" v-model.trim="password"><br><br>
+            年龄:<input type="number" v-model.number="age"><br><br>
+
+            性别：
+            <input type="radio" name="sex" v-model="sex" value="male" checked="male"> 男
+            <input type="radio" name="sex" v-model="sex" value="female"> 女
+            <br><br>
+            爱好：
+            <input type="checkbox" name="hobby" v-model="hobby" value="study"> 学习
+            <input type="checkbox" name="hobby" v-model="hobby" value="sleep"> 睡觉
+            <input type="checkbox" name="hobby" v-model="hobby" value="ganfan"> 吃饭
+            <br><br>
+            所属校区：
+            <select name="" id="" v-model="school">
+                <option value="--请选择校区--">--请选择校区--</option>
+                <option value="东校区">东校区</option>
+                <option value="南校区">南校区</option>
+                <option value="西校区">西校区</option>
+                <option value="北校区">北校区</option>
+            </select>
+            <br><br>
+
+            其他信息：
+            <textarea name="" id="" cols="30" rows="10" v-model.lazy="others"></textarea>
+            <br><br>
+
+            <input type="checkbox" name="xieyi" v-model="agree"> 阅读并接受<a href="https://www.baidu.com">《用户协议》</a>
+            <br><br>
+
+            <button>提交</button>
+        </form>
+    </div>
+    <!-- vm._data.set(target, key, value)
+        vm.$data.set() -->
+    <script>
+        const vm = new Vue({
+            el: '#hy',
+            data: {
+                account: '',
+                password: '',
+                sex: 'female',
+                age: '',
+                hobby: [],
+                school: '--请选择校区--',
+                others: '',
+                agree: false
+            },
+            methods: {
+                change() {
+                    Vue.set(this.car, "color", "red")
+                },
+                demo() {
+                    console.log(JSON.stringify(this._data))
+                    // return false
+                }
+            }
+
+
+        })
+    </script>
+</body>
+
+</html>

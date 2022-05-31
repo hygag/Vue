@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>自定义指令</title>
+    <script src="../vue.js"></script>
+</head>
+
+<body>
+    <div id="hy">
+        <h1>当前n值：{{n}}</h1>
+        放大十倍n:<span v-big="n"></span>
+        <button @click="n++">加一</button>
+
+        <hr>
+
+        <input type="text" v-fbind:value="n">
+    </div>
+
+
+    <script>
+        
+        // 跟过滤器一样的全局指令        
+        Vue.directive('名字',function(el, binding) {
+
+        })
+
+        // 在VM里定义的都是局部指令
+        const vm = new Vue({
+
+
+            el: "#hy",
+            data: {
+                n: 1,
+            },
+
+            directives: {
+
+                // 当指令所在的模板被重修解析时，会被调用
+
+                // el:是标签，binding是被绑定的元素
+                big(el, binding) {
+                    console.log(this)//这个this是Window
+                    el.innerText = binding.value * 10
+                },
+
+
+                // 多单词命名
+                // 'a-b'(el, binding){
+
+                // },
+                // 'big-number':function(el, binding){
+
+                // },
+
+                fbind: {
+                    // 指令被成功绑定时调用
+                    bind(el, binding) {
+                        el.value = binding.value
+                    },
+
+                    // 指令被插入页码时被调用
+                    inserted(el, binding) {
+                        el.focus()
+                    },
+
+                    // 被重新解析时
+                    update(el, binding) {
+                        el.value = binding.value
+                        // el.focus()
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

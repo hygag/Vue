@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../vue.js"></script>
+    <title>组件嵌套</title>
+</head>
+
+<body>
+    <div class="hy">
+        
+    </div>
+
+    <script type="text/javascript">
+
+
+        
+        // VueComponent 是小一辈的vm，因为不可以指定el，只能跟着大哥走
+        // 但是功能上，基本一样，vm能用的方法，vc也能用，因为内部底层
+        // VueComponent.prototype == Vue  
+
+        // student得放在school上面
+        const student = {
+            template: `
+            <div>
+                <h2>{{stuName}}</h2>
+                <h2>{{stuAge}}</h2>
+            </div>
+            `,
+            data() {
+                return {
+                    stuName: "hy",
+                    stuAge: "16"
+                }
+
+            }
+        }
+        
+        const school = {
+            // 组件嵌套，在父模板内添加
+            template: `
+            <div>
+                <h2>{{school}}</h2>
+                <h2>{{address}}</h2>
+                <student/>
+            </div>
+            `,
+            data() {
+                return {
+                    school: "文理",
+                    address: "常德"
+                }
+            },
+            // 添加组件嵌套
+            components:{
+                student
+            },
+            mounted(){
+                console.log(this)
+            }
+            
+        }
+        const app = {
+            template:`
+            <div>
+                <school/>
+            </div>
+            `,
+            components:{
+                school
+            }
+        }
+        const vm = new Vue({
+            el: '.hy',
+            template:`<app/>`,
+            components: {
+                app
+            }
+        })
+        console.log(vm)
+       console.log(student.prototype.__proto__ === Vue.prototype)
+    </script>
+</body>
+
+</html>

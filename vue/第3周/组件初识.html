@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../vue.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="hy">
+        <!-- 调用组件 ： 直接写组件标签-->
+        <school></school>
+        <school/>
+        <span>自闭和表签school/</span>
+    </div>
+    <script>
+
+
+        // 简写模式
+        const stu = {
+            //配置项
+        }
+
+        // 创建子组件
+        const school = Vue.extend({
+            name:"aaa", //指定开发者工具呈现的名字
+            template:
+                `
+            <div>
+                <h2>{{school}}</h2>
+                 <h2>{{name}}</h2>   
+            </div>
+            `,
+            data() {
+                return {
+                    school: 'bac',
+                    name: '123'
+                }
+
+            }
+        })
+
+
+        // Vue.component('组件名', 组件)：全局组件 
+
+        // 老大
+        new Vue({
+            el: '.hy',
+
+            // component：组件
+            components: {
+                school//引用子组件
+                // 多单词命名'my-school'
+                // name:组件名---引用格式
+            }
+        })
+
+    </script>
+</body>
+
+</html>

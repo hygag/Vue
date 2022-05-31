@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+    <div class="hy">
+        <h2 :style = "{opacity}">hyyy</h2>
+        <button @click="add()">{{n}}</button>
+    </div>
+    
+    <!-- 生命周期函数：模板解析的不同时间段 -->
+    
+    <script>
+        const vm = new Vue({
+            el:".hy",
+            // tempalte:`html标签`,
+            data:{
+                opacity: 1,
+                n:1
+            },
+            methods:{
+                add(){
+                    this.n ++
+                }
+            },
+           
+            //Vue模板在解析之前调用，数据代理还未执行
+            beforeCreate(){
+                console.log("啥也没做~")
+                console.log(this)
+                //debugger;开启断点
+            },
+
+            // Vue模板这个时候将data加到vue里去了，开启了数据代理，但是还是没有开始解析
+            created(){
+                console.log("开始数据代理")
+                console.log(this)
+                // debugger;
+            },
+            // 接下来开始判断有没有el(如果没有el,则他会等着自己去调用哪个vm.$mount(".hy"))则他会接着往下做
+            // 然后在判断有没有template，还没学template，所以
+            // 这个vue会将el绑定的那个玩意作为模板，并且开始解析模板，并且是虚拟dom
+
+            // 解析完了，但是只是虚拟dom，还没投到页面上去
+            beforeMount(){
+                // 这块地方操作不了dom,因为没啥用
+                console.log("已经产生虚拟dom了")
+                console.log(this)
+                debugger;
+            },
+            
+            // 然后再开始将虚拟dom转化为真实dom,也就说明页面会开始显示绑定的值了
+            
+            // Vue完成模板初始化解析后调用，后续增加的模板解析不算,比如当数据代理的值遭到改变的时候
+            // Vue会重新解析模板,但是这个解析不算初始化解析,应该叫做更新
+            mounted(){
+                // 这里可以操作dom,但是尽可能不要去操作它
+                console.log("Aa")
+                setInterval(() => {
+                    this.opacity-= 0.1
+                    if(this.opacity <= 0) this.opacity = 1
+                }, 200);
+            }
+        })
+
+    </script>
+</body>
+</html>
