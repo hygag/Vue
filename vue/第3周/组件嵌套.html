@@ -11,13 +11,13 @@
 
 <body>
     <div class="hy">
-        
+
     </div>
 
     <script type="text/javascript">
 
 
-        
+
         // VueComponent 是小一辈的vm，因为不可以指定el，只能跟着大哥走
         // 但是功能上，基本一样，vm能用的方法，vc也能用，因为内部底层
         // VueComponent.prototype == Vue  
@@ -38,50 +38,53 @@
 
             }
         }
-        
-        const school = {
-            // 组件嵌套，在父模板内添加
-            template: `
+
+        const school = Vue.extend(
+            {
+                // 组件嵌套，在父模板内添加
+                template: `
             <div>
                 <h2>{{school}}</h2>
                 <h2>{{address}}</h2>
                 <student/>
             </div>
             `,
-            data() {
-                return {
-                    school: "文理",
-                    address: "常德"
+                data() {
+                    return {
+                        school: "文理",
+                        address: "常德"
+                    }
+                },
+                // 添加组件嵌套
+                components: {
+                    student
+                },
+                mounted() {
+                    console.log(this)
                 }
-            },
-            // 添加组件嵌套
-            components:{
-                student
-            },
-            mounted(){
-                console.log(this)
+
             }
-            
-        }
+        )
         const app = {
-            template:`
+            template: `
             <div>
                 <school/>
             </div>
             `,
-            components:{
+            components: {
                 school
             }
         }
         const vm = new Vue({
             el: '.hy',
-            template:`<app/>`,
+            template: `<app/>`,
             components: {
                 app
             }
         })
-        console.log(vm)
-       console.log(student.prototype.__proto__ === Vue.prototype)
+        console.log("a", vm)
+        console.log("b", school.prototype.__proto__ === Vue.prototype)
+        console.log("c", Vue.prototype)
     </script>
 </body>
 
