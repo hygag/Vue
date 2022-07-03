@@ -5,6 +5,8 @@
     
     <h1>Student</h1>
     <button @click="getStudent">Student</button>
+
+    <button @click="unbind">解绑</button>
     
 </div>
     
@@ -26,6 +28,12 @@
                 // this.$emit('事件名'，参数)：参数可以多个，接收那边可以通过 function(name,...a)进行接收多个参数
                                                                        // ...a是es6语法，除了第一个，其他都打包到a数组
                 this.$emit('getStudent',this.name)
+            },
+            unbind(){
+                // 解绑单个直接this.$off('1')
+                //     多个需要this.$off(['1','2']),用数组
+                //     解绑所有this.$off()    
+                this.$off('getStudent')
             }
         }
     }

@@ -8,7 +8,8 @@
       <School :getSchoolName="getSchoolName"/>
 
       <!-- 这种是通过自定义事件，是在子组件进行$emit(事件名，参数)进行向父组件传递参数来得到结果 -->
-      <Student @getStudent="getStudentName"/>
+      <!-- 组件绑定的事件默认都是自定义事件，需要在子组件内进行发送，如果想绑定原生的js事件，需要加.native -->
+      <Student @getStudent="getStudentName" @click.native="show"/>
       <hr>
 <!-- 
       上面的自定义事件跟下面的又不太一样
@@ -16,8 +17,8 @@
       是通过ref来获取到Student这个标签，进行对标签添加事件 
       this.$refs.Student.$on('事件名'，方法)
       下面可以设置延时器之类的，满足这种需求 -->
-      <h1>ref</h1>
-      <Student ref="Student"/>
+ <!-- <h1>ref</h1>
+      <Student ref="Student"/> -->
     </div>
 
 </template>
@@ -52,6 +53,9 @@ export default{
     // getStudentName(name,...a){
     //     console.log(name)
     // }
+    show(){
+      alert(123)
+    }
   },
   mounted(){
     // 通过钩子进行对Student标签的获取进行绑定事件
