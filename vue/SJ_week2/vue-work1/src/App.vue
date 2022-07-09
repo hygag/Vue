@@ -2,7 +2,8 @@
   <div id="app">
     <div class="main"> 
     <MyHeader class="Header" 
-    :totalPage = 'totalPage'/>
+    :totalPage = 'totalPage'
+    @sortChange= 'sortChange'/>
     
     <MyList class="List" 
     :myData="myData" 
@@ -91,9 +92,43 @@ export default {
         }
         })
     },
+    
+    //2是降序，1是升序 默认为升序
+    sortChange(sortState){
+      if(sortState === 1){
+        for(let i = 0; i < this.myData.length - 1; i ++)
+          for(let j = 0; j < this.myData.length - 1; j ++){
+            if(Number(this.myData[j].F) > Number(this.myData[j + 1].F)){
+              let t = this.myData[j]
+              this.myData[j] = this.myData[j + 1]
+              this.myData[j + 1] = t
 
+              t = this.myData[j].myId
+              this.myData[j].myId = this.myData[j + 1].myId
+              this.myData[j + 1].myId = t
+            }
+          }
+          console.log(this.myData)
+      } 
+      else{
+        for(let i = 0; i < this.myData.length - 1; i ++)
+          for(let j = 0; j < this.myData.length - 1; j ++){
+            if(Number(this.myData[j].F) < Number(this.myData[j + 1].F)){
+              let t = this.myData[j]
+              this.myData[j] = this.myData[j + 1]
+              this.myData[j + 1] = t
+
+              t = this.myData[j].myId
+              this.myData[j].myId = this.myData[j + 1].myId
+              this.myData[j + 1].myId = t
+            }
+          }
+          console.log(this.myData)
+      }
+    }
     
   },
+
   watch:{
     myData:{
       deep:true,
@@ -119,6 +154,7 @@ export default {
     this.$bus.$on('addNum',this.addNum)
     this.$bus.$on('checkData',this.checkData)
     this.$bus.$on('editDate',this.editDate)
+    this.$bus.$on('sortChange',this.sortChange)
     
   },
   beforeDestroy(){
@@ -128,6 +164,7 @@ export default {
     this.$bus.$off('addNum')
     this.$bus.$off('checkData')
     this.$bus.$off('editDate')
+    this.$bus.$off('sortChange')
   },
   updated(){
     this.lastNum = this.myData.length + 1
